@@ -76,7 +76,7 @@ public class BigBerthaHardware extends OpMode {//my bad
     protected boolean leftClimberIsPressed = false;
     protected boolean rightClimberIsPressed = false;
 
-    private DcMotor motorLeftDrive, motorRightDrive, motorBackLeft, motorBackRight;
+    protected DcMotor motorLeftDrive, motorRightDrive, motorBackLeft, motorBackRight;
     private DcMotor motorLiftArm, motorLeftArm, motorRightArm;
     private DcMotor motorLift, motorLeftLift, motorRightLift;
     private DcMotor motorChainHooks, motorLeftChain, motorRightChain;
@@ -512,6 +512,7 @@ public class BigBerthaHardware extends OpMode {//my bad
         }*/
         try {
             compass = hardwareMap.compassSensor.get("compass");
+            compass.setMode(CompassSensor.CompassMode.MEASUREMENT_MODE);
         } catch (Exception opModeException) {
             setWarningMessage("compass");
             DbgLog.msg(opModeException.getLocalizedMessage());
@@ -574,9 +575,9 @@ public class BigBerthaHardware extends OpMode {//my bad
             DbgLog.msg (opModeException.getLocalizedMessage());
             sonar = null;
         }
-        compass.setMode(CompassSensor.CompassMode.CALIBRATION_MODE);
-        /*try {
-            Thread.sleep(500);
+        /*compass.setMode(CompassSensor.CompassMode.CALIBRATION_MODE);
+        try {
+            Thread.sleep(2000);
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }*/
@@ -614,9 +615,9 @@ public class BigBerthaHardware extends OpMode {//my bad
     }
     //------------OpMode Methods------------
     @Override public void start() {
-        compass.setMode(CompassSensor.CompassMode.MEASUREMENT_MODE);
-        /*try {
-            Thread.sleep(500);
+        /*compass.setMode(CompassSensor.CompassMode.MEASUREMENT_MODE);
+        try {
+            Thread.sleep(2000);
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }*/

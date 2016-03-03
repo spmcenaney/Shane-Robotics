@@ -50,24 +50,26 @@ public class CompassCalibration extends OpMode {
   private boolean returnToMeasurementMode = false;
   private boolean monitorCalibrationSuccess = false;
 
+  private int x = 0;
+
   // when paused time as passed, we will switch back to measurement mode.
   double pauseTime = 2.0;
 
   CompassSensor compass;
   DcMotor motorRight;
   DcMotor motorLeft;
+  DcMotor backRight;
+  DcMotor backLeft;
 
   @Override
   public void init() {
     compass = hardwareMap.compassSensor.get("compass");
     motorRight = hardwareMap.dcMotor.get("right");
     motorLeft = hardwareMap.dcMotor.get("left");
-  }
-
-  @Override
-  public void init_loop() {
-
-    motorRight.setDirection(DcMotor.Direction.REVERSE);
+    motorRight = hardwareMap.dcMotor.get("backRight");
+    motorLeft = hardwareMap.dcMotor.get("backLeft");
+    //motorRight.setDirection(DcMotor.Direction.REVERSE);
+    //backLeft.setDirection(DcMotor.Direction.REVERSE);
 
     // Set the compass to calibration mode
     compass.setMode(CompassSensor.CompassMode.CALIBRATION_MODE);
@@ -76,6 +78,14 @@ public class CompassCalibration extends OpMode {
     // calculate how long we should hold the current position
     pauseTime = time + HOLD_POSITION;
   }
+
+  /*@Override
+  public void init_loop() {
+    if (x > 2) {
+
+    }
+    x++;
+  }*/
 
   @Override
   public void loop() {
@@ -92,6 +102,8 @@ public class CompassCalibration extends OpMode {
         // rotate the robot towards our goal direction
         motorRight.setPower(-MOTOR_POWER);
         motorLeft.setPower(MOTOR_POWER);
+        backLeft.setPower(MOTOR_POWER);
+        backRight.setPower(-MOTOR_POWER);
 
         // Only turn for 20 seconds (plus the two second pause at the beginning)
         if (time > turnTime + HOLD_POSITION) {
@@ -104,6 +116,8 @@ public class CompassCalibration extends OpMode {
         DbgLog.msg("Returning to measurement mode");
         motorRight.setPower(0.0);
         motorLeft.setPower(0.0);
+        backRight.setPower(0.0);
+        backLeft.setPower(0.0);
 
         // change compass mode
         compass.setMode(CompassSensor.CompassMode.MEASUREMENT_MODE);

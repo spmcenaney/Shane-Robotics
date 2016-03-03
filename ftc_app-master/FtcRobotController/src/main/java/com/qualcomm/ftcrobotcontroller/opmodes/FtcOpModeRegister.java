@@ -68,6 +68,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("Big Bertha Autonomous Red", BigBerthaAutonomousRed.class);
     manager.register("Big Bertha Lost Weight TeleOp", BigBerthaLostWeightTeleOp.class);
     manager.register("Robot TeleOp", RobotTeleOp.class);
+    manager.register("Big Bertha CompassCalibration", BigBerthaCompassCalibration.class);
 
     /*
      * Uncomment any of the following lines if you want to register an op mode.
@@ -77,7 +78,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     //manager.register("ColorSensorDriver", ColorSensorDriver.class);
 
     //manager.register("IrSeekerOp", IrSeekerOp.class);
-    //manager.register("CompassCalibration", CompassCalibration.class);
+    manager.register("CompassCalibration", CompassCalibration.class);
     //manager.register("I2cAddressChangeExample", LinearI2cAddressChange.class);
 
 

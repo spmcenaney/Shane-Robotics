@@ -8,8 +8,7 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
  * @author SSI Robotics and revised by Shane McEnaney
  * @version 2015-08-02-13-57-----2015-12-01
  */
-public class BigBerthaTelemetry extends BigBerthaHardware//omg no u
-{
+public class BigBerthaTelemetry extends BigBerthaHardware {
     /**
      * Construct the class.
      * The system calls this member when the class is instantiated.
@@ -50,30 +49,30 @@ public class BigBerthaTelemetry extends BigBerthaHardware//omg no u
             telemetry.addData("23" , "Color2 red: " + color2.red());
         }*/
         if (compass != null) {
-            telemetry.addData("07" , "Init Compass Calibration Failed: " + compass.calibrationFailed());
-            telemetry.addData("08" , "Init Compass Direction: " + compass.getDirection());
+            telemetry.addData("08" , "Init Compass Calibration Failed: " + compass.calibrationFailed());
+            telemetry.addData("09" , "Init Compass Direction: " + compass.getDirection());
         }
         if (motorController!= null)
-            telemetry.addData("09", "Init Motor Controller: " + motorController.getConnectionInfo());
+            telemetry.addData("10", "Init Motor Controller: " + motorController.getConnectionInfo());
         if (gyro != null)
-            telemetry.addData("10", "Init Gyro: " + gyro.getRotation());
+            telemetry.addData("11", "Init Gyro: " + gyro.getRotation());
         if (ir != null)
-            telemetry.addData("11", "Init IR Seeker: " + ir.getAngle());
+            telemetry.addData("12", "Init IR Seeker: " + ir.getAngle());
         if (light != null)
-            telemetry.addData("12" , "Init Light: " + light.getLightDetected());
+            telemetry.addData("13" , "Init Light: " + light.getLightDetected());
         if (servoController != null)
-            telemetry.addData("13" , "Init Servo Controller: " + servoController.getConnectionInfo());
+            telemetry.addData("14" , "Init Servo Controller: " + servoController.getConnectionInfo());
         if (touch != null)
-            telemetry.addData("14" , "Init Touch: " + touch.isPressed());
+            telemetry.addData("15" , "Init Touch: " + touch.isPressed());
         if (multi != null) {
-            telemetry.addData("15", "Init Touch Multiplexer: " + multi.getSwitches());
-            telemetry.addData("16", "Init Touch Port 1: " + multi.isTouchSensorPressed(1));
-            telemetry.addData("17", "Init Touch Port 2: " + multi.isTouchSensorPressed(2));
-            telemetry.addData("18", "Init Touch Port 2: " + multi.isTouchSensorPressed(3));
-            telemetry.addData("19", "Init Touch Port 4: " + multi.isTouchSensorPressed(4));
+            telemetry.addData("16", "Init Touch Multiplexer: " + multi.getSwitches());
+            telemetry.addData("17", "Init Touch Port 1: " + multi.isTouchSensorPressed(1));
+            telemetry.addData("18", "Init Touch Port 2: " + multi.isTouchSensorPressed(2));
+            telemetry.addData("19", "Init Touch Port 2: " + multi.isTouchSensorPressed(3));
+            telemetry.addData("20", "Init Touch Port 4: " + multi.isTouchSensorPressed(4));
         }
         if (sonar != null)
-            telemetry.addData("20" , "Init Sonar: " + sonar.getUltrasonicLevel());
+            telemetry.addData("21" , "Init Sonar: " + sonar.getUltrasonicLevel());
     }
     /**
      * Update the telemetry with current gamepad readings.
@@ -114,46 +113,47 @@ public class BigBerthaTelemetry extends BigBerthaHardware//omg no u
             telemetry.addData("23" , "Color2 red: " + color2.red());
         }*/
         if (compass != null) {
-            telemetry.addData("08" , "Loop Compass Direction: " + compass.getDirection());
+            telemetry.addData("10" , "Loop Compass Direction: " + compass.getDirection());
+            telemetry.addData("101" , "Init Compass Calibration Failed: " + compass.calibrationFailed());
         }
         if (motorController!= null)
-            telemetry.addData("09", "Loop Motor Controller: " + motorController.getConnectionInfo());
+            telemetry.addData("11", "Loop Motor Controller: " + motorController.getConnectionInfo());
         if (gyro != null)
-            telemetry.addData("10", "Loop Gyro: " + gyro.getRotation());
+            telemetry.addData("12", "Loop Gyro: " + gyro.getRotation());
         if (ir != null)
-            telemetry.addData("11", "Loop IR Seeker: " + ir.getAngle());
+            telemetry.addData("13", "Loop IR Seeker: " + ir.getAngle());
         if (light != null)
-            telemetry.addData("12" , "Loop Light: " + light.getLightDetected());
+            telemetry.addData("14" , "Loop Light: " + light.getLightDetected());
         if (servoController != null)
-            telemetry.addData("13" , "Loop Servo Controller: " + servoController.getConnectionInfo());
+            telemetry.addData("15" , "Loop Servo Controller: " + servoController.getConnectionInfo());
         if (touch != null)
-            telemetry.addData("14" , "Loop Touch: " + touch.isPressed());
+            telemetry.addData("16" , "Loop Touch: " + touch.isPressed());
         if (multi != null) {
-            telemetry.addData("15", "Loop Touch Multiplexer: " + multi.getSwitches());
-            telemetry.addData("16", "Loop Touch Port 1: " + multi.isTouchSensorPressed(1));
-            telemetry.addData("17", "Loop Touch Port 2: " + multi.isTouchSensorPressed(2));
-            telemetry.addData("18", "Loop Touch Port 2: " + multi.isTouchSensorPressed(3));
-            telemetry.addData("19", "Loop Touch Port 4: " + multi.isTouchSensorPressed(4));
+            telemetry.addData("17", "Loop Touch Multiplexer: " + multi.getSwitches());
+            telemetry.addData("18", "Loop Touch Port 1: " + multi.isTouchSensorPressed(1));
+            telemetry.addData("19", "Loop Touch Port 2: " + multi.isTouchSensorPressed(2));
+            telemetry.addData("20", "Loop Touch Port 2: " + multi.isTouchSensorPressed(3));
+            telemetry.addData("21", "Loop Touch Port 4: " + multi.isTouchSensorPressed(4));
         }
         if (sonar != null)
-            telemetry.addData("20" , "Loop Sonar: " + sonar.getUltrasonicLevel());
+            telemetry.addData("22" , "Loop Sonar: " + sonar.getUltrasonicLevel());
 
-        telemetry.addData("21" , "Gamepad 1 Configuration: " + game1config);
-        telemetry.addData("22" ,  game1);
-        telemetry.addData("23" , "Gamepad 2 Configuration: " + game2config);
-        telemetry.addData("24" ,  game2);
-        telemetry.addData("25" , " ");
+        telemetry.addData("23" , "Gamepad 1 Configuration: " + game1config);
+        telemetry.addData("24" ,  game1);
+        telemetry.addData("25" , "Gamepad 2 Configuration: " + game2config);
+        telemetry.addData("26" ,  game2);
+        telemetry.addData("27" , " ");
         //telemetry.addData("07" , "Servo Position:");
         //telemetry.addData("08" , "Bucket Door Servo Position: "+ getBucketDoorPosition());
         //telemetry.addData("08" , "Climbers Servo Position: "   + getRightClimberPosition() + ", " + getLeftClimberPosition());
         //telemetry.addData("09" , "Hook Servo Position: "       + getHookPosition());
         //telemetry.addData("10" , "Man Servo Position: " + getManPosition());
         //telemetry.addData("11" , "Flag Servo Position: "       + getRightFlagPosition() + ", " + getLeftFlagPosition());
-        telemetry.addData("26" , "Motor Power:");
-        telemetry.addData("27" , "Right Drive Power: "+ getRightDrivePower()+ ", " + getRightEncoderCount());
-        telemetry.addData("28" , "Left Drive Power: " + getLeftDrivePower() + ", " + getLeftEncoderCount() + ", " + leftDrivePower);
-        telemetry.addData("29" , "Back Right Power: " + getBackRightPower() + ", " + getRightEncoderCount());
-        telemetry.addData("30" , "Back Left Power: "  + getBackLeftPower()  + ", " + getLeftEncoderCount());
+        telemetry.addData("28" , "Motor Power:");
+        telemetry.addData("29" , "Right Drive Power: "+ getRightDrivePower()+ ", " + getRightEncoderCount());
+        telemetry.addData("30" , "Left Drive Power: " + getLeftDrivePower() + ", " + getLeftEncoderCount() + ", " + leftDrivePower);
+        telemetry.addData("31" , "Back Right Power: " + getBackRightPower() + ", " + getRightEncoderCount());
+        telemetry.addData("32" , "Back Left Power: "  + getBackLeftPower()  + ", " + getLeftEncoderCount());
         /*telemetry.addData("17" , "Right Arm Power: "  + getRightArmPower()  + ", " + getLiftArmEncoderCount());
         telemetry.addData("18" , "Left Arm Power: "   + getLeftArmPower()   + ", " + getLiftArmEncoderCount());
         telemetry.addData("19" , "Right Lift Power: " + getRightLiftPower() + ", " + getLiftEncoderCount());
@@ -190,54 +190,54 @@ public class BigBerthaTelemetry extends BigBerthaHardware//omg no u
 
     public void updateGamepadTelemetry () {
         // Send telemetry data concerning gamepads to the driver station.
-        telemetry.addData("25" , " ");
-        telemetry.addData("26" , " ");
-        telemetry.addData("27" , "Robot Controllers: ");
-        telemetry.addData("28" , "Gamepad 1: ");
-        telemetry.addData("29" , "Servos:");
-        telemetry.addData("30" , "Flag A: "       + gamepad1.a);
-        telemetry.addData("31" , "Flag B: "       + gamepad1.b);
-        telemetry.addData("32" , "Bucket Door Y: "+ gamepad1.y);
-        telemetry.addData("33" , "Bucket Door X: "+ gamepad1.x);
-        telemetry.addData("34" , "Motors:");
-        telemetry.addData("35" , "Right Drive Y Stick: "+zero(-gamepad1.right_stick_y));
-        telemetry.addData("36" , "Left Drive Y Stick: " +zero(-gamepad1.left_stick_y));
-        telemetry.addData("37" , "Right X Stick: "           + gamepad1.right_stick_x);
-        telemetry.addData("38" , "Left X Stick: "            + gamepad1.left_stick_x);
-        telemetry.addData("39" , "Dpad Up: "                 + gamepad1.dpad_up);
-        telemetry.addData("40" , "Dpad Down: "               + gamepad1.dpad_down);
-        telemetry.addData("41" , "Dpad Right: "              + gamepad1.dpad_right);
-        telemetry.addData("42" , "Dpad Left: "               + gamepad1.dpad_left);
-        telemetry.addData("43" , "Chain Right Bumper: "      + gamepad1.right_bumper);
-        telemetry.addData("44" , "Rev Chain Left Bumper: "   + gamepad1.left_bumper);
-        telemetry.addData("45" , "Sweeper Right Trigger: "   + gamepad1.right_trigger);
-        telemetry.addData("46" , "Rev Sweeper Left Trigger: "+-gamepad1.left_trigger);
-        telemetry.addData("47" , "Scale/Sweeper Off Start: " + gamepad1.start);
-        telemetry.addData("48" , "Scale/Sweeper Res Guide: " + gamepad1.guide);
-        telemetry.addData("49" , "Back: "                    + gamepad1.back);
-        telemetry.addData("50" , "Gamepad 2:");
-        telemetry.addData("51" , " ");
-        telemetry.addData("52" , "Servos:");
-        telemetry.addData("53" , "Man A: " + gamepad2.a);
-        telemetry.addData("54" , "Man B: " + gamepad2.b);
-        telemetry.addData("55" , "Hook Y: "+ gamepad2.y);
-        telemetry.addData("56" , "Hook X: "+ gamepad2.x);
-        telemetry.addData("57" , "Motors:");
-        telemetry.addData("58" , "Right Arm Y Stick: "+zero(-gamepad2.right_stick_y));
-        telemetry.addData("59" , "Left Arm Y Stick: " +zero(-gamepad2.left_stick_y));
-        telemetry.addData("60" , "Right X Stick: "         + gamepad2.right_stick_x);
-        telemetry.addData("61" , "Left X Stick: "          + gamepad2.left_stick_x);
-        telemetry.addData("62" , "Bucket Dpad Up: "        + gamepad2.dpad_up);
-        telemetry.addData("63" , "Bucket Dpad Down: "      + gamepad2.dpad_down);
-        telemetry.addData("64" , "Dpad Right: "            + gamepad2.dpad_right);
-        telemetry.addData("65" , "Dpad Left: "             + gamepad2.dpad_left);
-        telemetry.addData("66" , "Rev Right Lift Bumper: " + gamepad2.right_bumper);
-        telemetry.addData("67" , "Rev Left Lift Bumper: "  + gamepad2.left_bumper);
-        telemetry.addData("68" , "Right Lift Trigger: "    + gamepad2.right_trigger);
-        telemetry.addData("69" , "Left Lift Trigger: "     +-gamepad2.left_trigger);
-        telemetry.addData("70" , "Start: "                 + gamepad2.start);
-        telemetry.addData("71" , "Guide: "                 + gamepad2.guide);
-        telemetry.addData("72" , "Back: "                  + gamepad2.back);
+        telemetry.addData("35" , " ");
+        telemetry.addData("36" , " ");
+        telemetry.addData("37" , "Robot Controllers: ");
+        telemetry.addData("38" , "Gamepad 1: ");
+        telemetry.addData("39" , "Servos:");
+        telemetry.addData("40" , "Flag A: "       + gamepad1.a);
+        telemetry.addData("41" , "Flag B: "       + gamepad1.b);
+        telemetry.addData("42" , "Bucket Door Y: "+ gamepad1.y);
+        telemetry.addData("43" , "Bucket Door X: "+ gamepad1.x);
+        telemetry.addData("44" , "Motors:");
+        telemetry.addData("45" , "Right Drive Y Stick: "+zero(-gamepad1.right_stick_y));
+        telemetry.addData("46" , "Left Drive Y Stick: " +zero(-gamepad1.left_stick_y));
+        telemetry.addData("47" , "Right X Stick: "           + gamepad1.right_stick_x);
+        telemetry.addData("48" , "Left X Stick: "            + gamepad1.left_stick_x);
+        telemetry.addData("49" , "Dpad Up: "                 + gamepad1.dpad_up);
+        telemetry.addData("50" , "Dpad Down: "               + gamepad1.dpad_down);
+        telemetry.addData("51" , "Dpad Right: "              + gamepad1.dpad_right);
+        telemetry.addData("52" , "Dpad Left: "               + gamepad1.dpad_left);
+        telemetry.addData("53" , "Chain Right Bumper: "      + gamepad1.right_bumper);
+        telemetry.addData("54" , "Rev Chain Left Bumper: "   + gamepad1.left_bumper);
+        telemetry.addData("55" , "Sweeper Right Trigger: "   + gamepad1.right_trigger);
+        telemetry.addData("56" , "Rev Sweeper Left Trigger: "+-gamepad1.left_trigger);
+        telemetry.addData("57" , "Scale/Sweeper Off Start: " + gamepad1.start);
+        telemetry.addData("58" , "Scale/Sweeper Res Guide: " + gamepad1.guide);
+        telemetry.addData("59" , "Back: "                    + gamepad1.back);
+        telemetry.addData("60" , "Gamepad 2:");
+        telemetry.addData("61" , " ");
+        telemetry.addData("62" , "Servos:");
+        telemetry.addData("63" , "Man A: " + gamepad2.a);
+        telemetry.addData("64" , "Man B: " + gamepad2.b);
+        telemetry.addData("65" , "Hook Y: "+ gamepad2.y);
+        telemetry.addData("66" , "Hook X: "+ gamepad2.x);
+        telemetry.addData("67" , "Motors:");
+        telemetry.addData("68" , "Right Arm Y Stick: "+zero(-gamepad2.right_stick_y));
+        telemetry.addData("69" , "Left Arm Y Stick: " +zero(-gamepad2.left_stick_y));
+        telemetry.addData("70" , "Right X Stick: "         + gamepad2.right_stick_x);
+        telemetry.addData("71" , "Left X Stick: "          + gamepad2.left_stick_x);
+        telemetry.addData("72" , "Bucket Dpad Up: "        + gamepad2.dpad_up);
+        telemetry.addData("73" , "Bucket Dpad Down: "      + gamepad2.dpad_down);
+        telemetry.addData("74" , "Dpad Right: "            + gamepad2.dpad_right);
+        telemetry.addData("75" , "Dpad Left: "             + gamepad2.dpad_left);
+        telemetry.addData("76" , "Rev Right Lift Bumper: " + gamepad2.right_bumper);
+        telemetry.addData("77" , "Rev Left Lift Bumper: "  + gamepad2.left_bumper);
+        telemetry.addData("78" , "Right Lift Trigger: "    + gamepad2.right_trigger);
+        telemetry.addData("79" , "Left Lift Trigger: "     +-gamepad2.left_trigger);
+        telemetry.addData("80" , "Start: "                 + gamepad2.start);
+        telemetry.addData("81" , "Guide: "                 + gamepad2.guide);
+        telemetry.addData("82" , "Back: "                  + gamepad2.back);
     } //--------------------------------------------------------------------------updateGamepadTelemetry
     /**
      * Update the telemetry's first message with the specified message.
