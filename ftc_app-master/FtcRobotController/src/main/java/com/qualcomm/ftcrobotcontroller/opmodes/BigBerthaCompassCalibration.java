@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.CompassSensor;
  * Created by spmce on 3/1/2016.
  */
 public class BigBerthaCompassCalibration extends BigBerthaTelemetry {
-
+/*
     //private boolean run = true;
 
     @Override
@@ -83,5 +83,5 @@ public class BigBerthaCompassCalibration extends BigBerthaTelemetry {
     private String calibrationMessageToString(boolean failed) {
         if (failed){ return "Calibration Failed!"; }
         else { return "Calibration Succeeded." ; }
-    }
+    }*/
 }

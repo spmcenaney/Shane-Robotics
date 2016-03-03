@@ -22,22 +22,23 @@ public class BigBerthaLostWeightTeleOp extends BigBerthaTelemetry {
     @Override
     public void init() {
         super.init();
-        compass.setMode(CompassSensor.CompassMode.MEASUREMENT_MODE);
-        pauseTime = time + HOLD_POSITION;
+        //compass.setMode(CompassSensor.CompassMode.MEASUREMENT_MODE);
+        //pauseTime = time + HOLD_POSITION;
     }
 
     @Override
     public void init_loop() {
-        if (time > pauseTime) {
+        super.init_loop();
+        /*if (time > pauseTime) {
             super.init_loop();
             telemetry.addData("Compass", "Compass in measurement mode");
-        }
+        }*/
     }
     /**
      * The system calls this member repeatedly while the OpMode is running.
      */
     @Override public void loop () {
-        if (time > pauseTime) {
+        //if (time > pauseTime) {
             // ------------Configurations------------
             if (gamepad1.start)
                 game1config = 0;
@@ -475,7 +476,7 @@ public class BigBerthaLostWeightTeleOp extends BigBerthaTelemetry {
         }*/
             // The setPower methods write the motor power values to the DcMotor
             // class, but the power levels aren't applied until this method ends.
-            setDrivePower(-leftDrivePower, -rightDrivePower, backLeftPower, backRightPower);
+            setDrivePower(leftDrivePower, rightDrivePower, -backLeftPower, - backRightPower);
             //setChainHooksPower(chainHooksPower);
             //setLiftPower(leftLiftPower, rightLiftPower);
             //setSweeperPower(sweeperPower, backSweeperPower);
@@ -525,6 +526,6 @@ public class BigBerthaLostWeightTeleOp extends BigBerthaTelemetry {
         }*/
             telemetry.addData("73", "Gamepad 1 Config: " + game1config);
             telemetry.addData("74", "Gamepad 2 Config: " + game2config);
-        }
+        //}
     } //--------------------------------------------------------------------------loop
 } //------------------------------------------------------------------------------BigBerthaTeleOp
