@@ -48,14 +48,14 @@ public class BigBerthaTelemetry extends BigBerthaHardware {
             telemetry.addData("22" , "Color2 green: " + color2.green());
             telemetry.addData("23" , "Color2 red: " + color2.red());
         }*/
-        if (compass != null) {
-            telemetry.addData("08" , "Init Compass Calibration Failed: " + compass.calibrationFailed());
-            telemetry.addData("09" , "Init Compass Direction: " + compass.getDirection());
-        }
+        //if (compass != null) {
+            //telemetry.addData("08" , "Init Compass Calibration Failed: " + compass.calibrationFailed());
+            //telemetry.addData("09" , "Init Compass Direction: " + compass.getDirection());
+        //}
         if (motorController!= null)
             telemetry.addData("10", "Init Motor Controller: " + motorController.getConnectionInfo());
         if (gyro != null)
-            telemetry.addData("11", "Init Gyro: " + gyro.getRotation());
+            telemetry.addData("11", "Init Gyro: " + (gyro.getRotation()-573));
         if (ir != null)
             telemetry.addData("12", "Init IR Seeker: " + ir.getAngle());
         if (light != null)
@@ -114,12 +114,12 @@ public class BigBerthaTelemetry extends BigBerthaHardware {
         }*/
         if (compass != null) {
             telemetry.addData("10" , "Loop Compass Direction: " + compass.getDirection());
-            telemetry.addData("101" , "Init Compass Calibration Failed: " + compass.calibrationFailed());
+            //telemetry.addData("101" , "Init Compass Calibration Failed: " + compass.calibrationFailed());
         }
         if (motorController!= null)
             telemetry.addData("11", "Loop Motor Controller: " + motorController.getConnectionInfo());
         if (gyro != null)
-            telemetry.addData("12", "Loop Gyro: " + gyro.getRotation());
+            telemetry.addData("12", "Loop Gyro: " + (gyro.getRotation()-573));
         if (ir != null)
             telemetry.addData("13", "Loop IR Seeker: " + ir.getAngle());
         if (light != null)

@@ -28,6 +28,22 @@ import java.text.NumberFormat;
  * @version 2015-08-13-20-04-----2015-12-01
  */
 public class BigBerthaHardware extends OpMode {//my bad
+    // how long to hold before the next action
+    final static double HOLD_POSITION = 3.0; // in seconds
+
+    // wheel speed
+    final static double MOTOR_POWER = 0.2; // scale from 0 to 1
+
+    // Turn around at least twice in 20 seconds.
+    protected double turnTime = 20.0;
+
+    protected boolean keepTurning = true;
+    protected boolean returnToMeasurementMode = false;
+    protected boolean monitorCalibrationSuccess = false;
+
+    // when paused time as passed, we will switch back to measurement mode.
+    double pauseTime = 2.0;
+
     //------------Private Variables------------
     private boolean warningGenerated = false;
     private String warningMessage;
@@ -512,7 +528,9 @@ public class BigBerthaHardware extends OpMode {//my bad
         }*/
         try {
             compass = hardwareMap.compassSensor.get("compass");
-            compass.setMode(CompassSensor.CompassMode.MEASUREMENT_MODE);
+            //compass.setMode(CompassSensor.CompassMode.MEASUREMENT_MODE);
+            // calculate how long we should hold the current position
+            //pauseTime = time + HOLD_POSITION;
         } catch (Exception opModeException) {
             setWarningMessage("compass");
             DbgLog.msg(opModeException.getLocalizedMessage());

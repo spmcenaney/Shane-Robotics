@@ -2,6 +2,9 @@
  * Created by spmce on 12/30/2015.
  */
 package com.qualcomm.ftcrobotcontroller.opmodes;
+
+import com.qualcomm.robotcore.hardware.CompassSensor;
+
 /**
  *TeleOp for Big Bertha
  * @author SSI Robotics and revised by Shane McEnaney
@@ -16,41 +19,56 @@ public class BigBerthaLostWeightTeleOp extends BigBerthaTelemetry {
         // Initialize base classes and class members.
         // All via self-construction.
     } //--------------------------------------------------------------------------BigBerthaTeleOp
+    @Override
+    public void init() {
+        super.init();
+        compass.setMode(CompassSensor.CompassMode.MEASUREMENT_MODE);
+        pauseTime = time + HOLD_POSITION;
+    }
+
+    @Override
+    public void init_loop() {
+        if (time > pauseTime) {
+            super.init_loop();
+            telemetry.addData("Compass", "Compass in measurement mode");
+        }
+    }
     /**
      * The system calls this member repeatedly while the OpMode is running.
      */
     @Override public void loop () {
-        // ------------Configurations------------
-        if (gamepad1.start)
-            game1config = 0;
-        if (gamepad1.guide) {
-            if (game1config == 0) {
-                //sweeperOff = false;
-                //aux1ScaleOff = false;
-                //fullDriveOff = false;
-                //fastDriveOff = false;
-                //slowDriveOff = false;
-                //chainHooksOff = false;
-                //climberOff = false;
-                game1config = 1;
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException ex) {
-                    Thread.currentThread().interrupt();
-                }
-            } else if (game1config == 1) {
-                //sweeperOff = true;
-                //aux1ScaleOff = true;
-                //driveOff = true;
-                //backDriveOff = false;
-                //chainHooksOff= true;
-                game1config = 2;
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException ex) {
-                    Thread.currentThread().interrupt();
-                }
-            }/* else if (game1config == 2) {
+        if (time > pauseTime) {
+            // ------------Configurations------------
+            if (gamepad1.start)
+                game1config = 0;
+            if (gamepad1.guide) {
+                if (game1config == 0) {
+                    //sweeperOff = false;
+                    //aux1ScaleOff = false;
+                    //fullDriveOff = false;
+                    //fastDriveOff = false;
+                    //slowDriveOff = false;
+                    //chainHooksOff = false;
+                    //climberOff = false;
+                    game1config = 1;
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                    }
+                } else if (game1config == 1) {
+                    //sweeperOff = true;
+                    //aux1ScaleOff = true;
+                    //driveOff = true;
+                    //backDriveOff = false;
+                    //chainHooksOff= true;
+                    game1config = 2;
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                    }
+                }/* else if (game1config == 2) {
                 //sweeperOff = false;
                 //aux1ScaleOff = false;
                 fullDriveOff = false;
@@ -72,19 +90,19 @@ public class BigBerthaLostWeightTeleOp extends BigBerthaTelemetry {
                 } catch (InterruptedException ex) {
                     Thread.currentThread().interrupt();
                 }
-            } */else {
-                //sweeperOff = true;
-                //aux1ScaleOff = false;
-                //fullDriveOff = false;
-                //chainHooksOff = false;
-                game1config = 0;
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException ex) {
-                    Thread.currentThread().interrupt();
+            } */ else {
+                    //sweeperOff = true;
+                    //aux1ScaleOff = false;
+                    //fullDriveOff = false;
+                    //chainHooksOff = false;
+                    game1config = 0;
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                    }
                 }
             }
-        }
         /*if (gamepad2.start)
             game2config = 0;
         if (gamepad2.guide) {
@@ -118,10 +136,10 @@ public class BigBerthaLostWeightTeleOp extends BigBerthaTelemetry {
                 }
             }
         }*/
-        leftDrivePower = 0.0f;
-        rightDrivePower = 0.0f;
-        backLeftPower = 0.0f;
-        backRightPower = 0.0f;
+            leftDrivePower = 0.0f;
+            rightDrivePower = 0.0f;
+            backLeftPower = 0.0f;
+            backRightPower = 0.0f;
         /*float leftArmPower = 0.0f;
         float rightArmPower = 0.0f;
         float leftLiftPower = 0.0f;
@@ -138,27 +156,27 @@ public class BigBerthaLostWeightTeleOp extends BigBerthaTelemetry {
         float chainHooksUpScale = 0.0f;
         float chainHooksDownScale = 0.0f;*/
 
-        if (game1config == 1) {
-            leftDrivePower = scaleMotorPower(-gamepad1.left_stick_y);
-            rightDrivePower = scaleMotorPower(-gamepad1.right_stick_y);
-            backLeftPower = scaleMotorPower(-gamepad1.left_stick_y);
-            backRightPower = scaleMotorPower(-gamepad1.right_stick_y);
-        }
-        if (game1config == 2) {
-            leftDrivePower = scaleMotorPower(gamepad1.left_trigger);
-            rightDrivePower = scaleMotorPower(gamepad1.right_trigger);
-        }
-        if (game1config == 0) {
-            float y = (-gamepad1.left_stick_y);
-            float x = (-gamepad1.left_stick_x);
-            leftDrivePower = y + 3*x/2;
-            rightDrivePower = y - 3*x/2;
-            backLeftPower = y + 3*x/2;
-            backRightPower = y - 3*x/2;
-            leftDrivePower -= 2*(gamepad1.right_stick_x);
-            rightDrivePower += 2*(gamepad1.right_stick_x);
-            backLeftPower += 2*(gamepad1.right_stick_x);
-            backRightPower -= 2*(gamepad1.right_stick_x);
+            if (game1config == 1) {
+                leftDrivePower = scaleMotorPower(-gamepad1.left_stick_y);
+                rightDrivePower = scaleMotorPower(-gamepad1.right_stick_y);
+                backLeftPower = scaleMotorPower(-gamepad1.left_stick_y);
+                backRightPower = scaleMotorPower(-gamepad1.right_stick_y);
+            }
+            if (game1config == 2) {
+                leftDrivePower = scaleMotorPower(gamepad1.left_trigger);
+                rightDrivePower = scaleMotorPower(gamepad1.right_trigger);
+            }
+            if (game1config == 0) {
+                float y = (-gamepad1.left_stick_y);
+                float x = (-gamepad1.left_stick_x);
+                leftDrivePower = y + 3 * x / 2;
+                rightDrivePower = y - 3 * x / 2;
+                backLeftPower = y + 3 * x / 2;
+                backRightPower = y - 3 * x / 2;
+                leftDrivePower -= 2 * (gamepad1.right_stick_x);
+                rightDrivePower += 2 * (gamepad1.right_stick_x);
+                backLeftPower += 2 * (gamepad1.right_stick_x);
+                backRightPower -= 2 * (gamepad1.right_stick_x);
 
             /*leftDrivePower = y - 3*(gamepad1.right_stick_x)/2;
             rightDrivePower = y + 3*(gamepad1.right_stick_x)/2;
@@ -168,18 +186,18 @@ public class BigBerthaLostWeightTeleOp extends BigBerthaTelemetry {
             rightDrivePower -= 2*x;
             backLeftPower -= 2*x;
             backRightPower += 2*x;*/
-        }
-        //if (game1config == 3) {}
-        //if (game1config == 4) {}
+            }
+            //if (game1config == 3) {}
+            //if (game1config == 4) {}
 
-        if (gamepad1.left_bumper)
-            leftDrivePower = -leftDrivePower;
-        if (gamepad1.right_bumper)
-            rightDrivePower = -rightDrivePower;
-        if (gamepad1.left_trigger > 0)
-            backLeftPower = -backLeftPower;
-        if (gamepad1.right_trigger > 0)
-            backRightPower = -backRightPower;
+            if (gamepad1.left_bumper)
+                leftDrivePower = -leftDrivePower;
+            if (gamepad1.right_bumper)
+                rightDrivePower = -rightDrivePower;
+            if (gamepad1.left_trigger > 0)
+                backLeftPower = -backLeftPower;
+            if (gamepad1.right_trigger > 0)
+                backRightPower = -backRightPower;
 
         /*if (game2config == 0) {
             leftLiftPower = scaleMotorPower(-gamepad2.left_stick_y);
@@ -309,7 +327,7 @@ public class BigBerthaLostWeightTeleOp extends BigBerthaTelemetry {
                 }
             }
         }*/
-        //if (game2config == 3) {}// does this thing even work?
+            //if (game2config == 3) {}// does this thing even work?
 
         /*if (fullDriveOff) {
             driveOff = true;
@@ -455,14 +473,14 @@ public class BigBerthaLostWeightTeleOp extends BigBerthaTelemetry {
                 }
             }
         }*/
-        // The setPower methods write the motor power values to the DcMotor
-        // class, but the power levels aren't applied until this method ends.
-        setDrivePower(-leftDrivePower, -rightDrivePower, backLeftPower, backRightPower);
-        //setChainHooksPower(chainHooksPower);
-        //setLiftPower(leftLiftPower, rightLiftPower);
-        //setSweeperPower(sweeperPower, backSweeperPower);
-        //setSweeperPosition(sweeperPosition, backSweeperPosition);
-        //setLiftArmPower(leftArmPower, rightArmPower);
+            // The setPower methods write the motor power values to the DcMotor
+            // class, but the power levels aren't applied until this method ends.
+            setDrivePower(-leftDrivePower, -rightDrivePower, backLeftPower, backRightPower);
+            //setChainHooksPower(chainHooksPower);
+            //setLiftPower(leftLiftPower, rightLiftPower);
+            //setSweeperPower(sweeperPower, backSweeperPower);
+            //setSweeperPosition(sweeperPosition, backSweeperPosition);
+            //setLiftArmPower(leftArmPower, rightArmPower);
 
         /*if (gamepad2.dpad_up) {
             double bucketPower = 0.8;
@@ -492,16 +510,21 @@ public class BigBerthaLostWeightTeleOp extends BigBerthaTelemetry {
             setManPosition(0.0); //0.0 is backward at full speed
         else
             setManPosition(0.5); *///0.5 is stopped
-        //------------Servo Motors------------
-        // The mPosition methods write the motor power values to the Servo
-        // class, but the positions aren't applied until this method ends.
-        ////////////////////////////---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------setHookPosition (0.5
+            //------------Servo Motors------------
+            // The mPosition methods write the motor power values to the Servo
+            // class, but the positions aren't applied until this method ends.
+            ////////////////////////////---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------setHookPosition (0.5
 
-        //------------Telemetry------------
-        // Send telemetry data to the driver station.
-        updateTelemetry(); // Update common telemetry
-        updateGamepadTelemetry();
-        telemetry.addData("73", "Gamepad 1 Config: " + game1config);
-        telemetry.addData("74", "Gamepad 2 Config: " + game2config);
+            //------------Telemetry------------
+            // Send telemetry data to the driver station.
+            updateTelemetry(); // Update common telemetry
+            updateGamepadTelemetry();
+        /*if (compass != null) {
+            telemetry.addData("10", "Loop Compass Direction: " + compass.getDirection());
+            //telemetry.addData("101" , "Init Compass Calibration Failed: " + compass.calibrationFailed());
+        }*/
+            telemetry.addData("73", "Gamepad 1 Config: " + game1config);
+            telemetry.addData("74", "Gamepad 2 Config: " + game2config);
+        }
     } //--------------------------------------------------------------------------loop
 } //------------------------------------------------------------------------------BigBerthaTeleOp

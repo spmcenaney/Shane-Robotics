@@ -79,13 +79,10 @@ public class CompassCalibration extends OpMode {
     pauseTime = time + HOLD_POSITION;
   }
 
-  /*@Override
+  @Override
   public void init_loop() {
-    if (x > 2) {
 
-    }
-    x++;
-  }*/
+  }
 
   @Override
   public void loop() {
