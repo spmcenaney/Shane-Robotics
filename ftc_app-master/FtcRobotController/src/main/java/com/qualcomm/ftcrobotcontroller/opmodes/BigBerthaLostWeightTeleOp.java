@@ -168,7 +168,7 @@ public class BigBerthaLostWeightTeleOp extends BigBerthaTelemetry {
                 rightDrivePower = scaleMotorPower(gamepad1.right_trigger);
             }
             if (game1config == 0) {
-                float y = (-gamepad1.left_stick_y);
+                float y = (gamepad1.left_stick_y);
                 float x = (-gamepad1.left_stick_x);
                 leftDrivePower = y + 3 * x / 2;
                 rightDrivePower = y - 3 * x / 2;
@@ -476,7 +476,7 @@ public class BigBerthaLostWeightTeleOp extends BigBerthaTelemetry {
         }*/
             // The setPower methods write the motor power values to the DcMotor
             // class, but the power levels aren't applied until this method ends.
-            setDrivePower(leftDrivePower, rightDrivePower, -backLeftPower, - backRightPower);
+            setDrivePower(-leftDrivePower, -rightDrivePower, backLeftPower, backRightPower);
             //setChainHooksPower(chainHooksPower);
             //setLiftPower(leftLiftPower, rightLiftPower);
             //setSweeperPower(sweeperPower, backSweeperPower);
